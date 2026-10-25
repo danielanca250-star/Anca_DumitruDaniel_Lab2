@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,9 @@ public class IndexModel : PageModel
     public async Task OnGetAsync()
     {
         Book = await _context.Book
-    .Include(b => b.Publisher)
-    .ToListAsync();
+            .Include(b => b.Publisher)
+            .Include(b => b.BookCategories)
+                .ThenInclude(bc => bc.Category)
+            .ToListAsync();
     }
 }
