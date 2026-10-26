@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
+using Anca_DumitruDaniel_Lab2.Data;
 #nullable disable
 
 namespace Anca_DumitruDaniel_Lab2.Migrations

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using Anca_DumitruDaniel_Lab2.Data;
 
 namespace Anca_DumitruDaniel_Lab2.Models
 {

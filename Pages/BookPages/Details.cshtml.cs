@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Anca_DumitruDaniel_Lab2.Models;
-
+using Anca_DumitruDaniel_Lab2.Data;
 namespace Anca_DumitruDaniel_Lab2.Pages.BookPages;
 
 public class DetailsModel : PageModel

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Anca_DumitruDaniel_Lab2.Models;
-
+using Anca_DumitruDaniel_Lab2.Data;
 namespace Anca_DumitruDaniel_Lab2.Pages.BookPages;
 
 public class CreateModel : BookCategoriesPageModel
