@@ -1,12 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Anca_DumitruDaniel_Lab2.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Anca_DumitruDaniel_Lab2.Models;
+using Anca_DumitruDaniel_Lab2.Data;
 namespace Anca_DumitruDaniel_Lab2.Pages.BookPages;
 
-public class CreateModel : PageModel
+public class CreateModel : BookCategoriesPageModel
 {
     private readonly Anca_DumitruDaniel_Lab2Context _context;
 
@@ -15,23 +14,37 @@ public class CreateModel : PageModel
         _context = context;
     }
 
-    public IActionResult OnGet()
-    {
-        ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
-        return Page();
-    }
-
     [BindProperty]
     public Book Book { get; set; } = default!;
 
-    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+    public IActionResult OnGet()
+    {
+        Book = new Book();
+        Book.BookCategories = new List<BookCategory>();
+
+        PopulateAssignedCategoryData(_context, Book);
+
+        ViewData["PublisherID"] = new SelectList(
+            _context.Set<Publisher>(), "ID", "PublisherName");
+
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
     {
         if (!ModelState.IsValid)
         {
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
+            PopulateAssignedCategoryData(_context, Book);
+
+            ViewData["PublisherID"] = new SelectList(
+                _context.Set<Publisher>(), "ID", "PublisherName");
+
             return Page();
         }
+
+        Book.BookCategories = new List<BookCategory>();
+
+        UpdateBookCategories(_context, selectedCategories, Book);
 
         _context.Book.Add(Book);
         await _context.SaveChangesAsync();

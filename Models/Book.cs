@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.Collections.Generic;
 
 namespace Anca_DumitruDaniel_Lab2.Models
 {
@@ -23,7 +24,7 @@ namespace Anca_DumitruDaniel_Lab2.Models
         public int? PublisherID { get; set; }
 
         public Publisher? Publisher { get; set; }
-
+        public ICollection<BookCategory>? BookCategories { get; set; }
 
     }
 

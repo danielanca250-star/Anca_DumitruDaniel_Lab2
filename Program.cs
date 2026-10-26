@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Anca_DumitruDaniel_Lab2.Data;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Anca_DumitruDaniel_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Anca_DumitruDaniel_Lab2Context' not found.");
 

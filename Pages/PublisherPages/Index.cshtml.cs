@@ -1,7 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
+
+using Anca_DumitruDaniel_Lab2.Data;
+using Anca_DumitruDaniel_Lab2.Models;
+using Anca_DumitruDaniel_Lab2.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Anca_DumitruDaniel_Lab2.Models;
 
 namespace Anca_DumitruDaniel_Lab2.Pages.PublisherPages;
 
@@ -16,8 +18,30 @@ public class IndexModel : PageModel
 
     public IList<Publisher> Publisher { get; set; } = default!;
 
-    public async Task OnGetAsync()
+    public PublisherIndexData PublisherData { get; set; }
+        = new PublisherIndexData();
+
+    public int PublisherID { get; set; }
+
+    public int BookID { get; set; }
+
+    public async Task OnGetAsync(int? id, int? bookID)
     {
-        Publisher = await _context.Publisher.ToListAsync();
+        PublisherData = new PublisherIndexData();
+
+        PublisherData.Publishers = await _context.Publisher
+            .Include(p => p.Books)
+            .OrderBy(p => p.PublisherName)
+            .ToListAsync();
+
+        if (id != null)
+        {
+            PublisherID = id.Value;
+
+            Publisher publisher = PublisherData.Publishers
+                .Single(p => p.ID == id.Value);
+
+            PublisherData.Books = publisher.Books;
+        }
     }
 }
