@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Anca_DumitruDaniel_Lab2.Models;
 using Anca_DumitruDaniel_Lab2.Data;
 
 namespace Anca_DumitruDaniel_Lab2.Pages.BookPages;
 
+[Authorize(Roles = "Admin")]
 public class EditModel : BookCategoriesPageModel
 {
     private readonly Anca_DumitruDaniel_Lab2Context _context;

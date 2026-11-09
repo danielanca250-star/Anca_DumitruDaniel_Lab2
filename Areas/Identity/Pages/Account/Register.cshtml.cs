@@ -106,6 +106,9 @@ public class RegisterModel : PageModel
 
             if (result.Succeeded)
             {
+                // Atribuim automat rolul User
+                var role = await _userManager.AddToRoleAsync(user, "User");
+
                 // Salvam utilizatorul si in tabelul Member
                 var member = new Member
                 {

@@ -1,10 +1,14 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using Anca_DumitruDaniel_Lab2.Models;
 using Anca_DumitruDaniel_Lab2.Data;
+
 namespace Anca_DumitruDaniel_Lab2.Pages.BookPages;
 
+[Authorize(Roles = "Admin")]
 public class DeleteModel : PageModel
 {
     private readonly Anca_DumitruDaniel_Lab2Context _context;
@@ -25,6 +29,7 @@ public class DeleteModel : PageModel
         }
 
         var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
+
         if (book is null)
         {
             return NotFound();
@@ -45,6 +50,7 @@ public class DeleteModel : PageModel
         }
 
         var book = await _context.Book.FindAsync(id);
+
         if (book != null)
         {
             Book = book;
